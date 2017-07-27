@@ -1,0 +1,25 @@
+#เข้าเว็บอันแรกเสมอ***
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Handle Authorization Header #ถูกโยนไปที่ index เพื่อให้ทำงานถูกต้อง load libary
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+#โหมดรีไลท์เช่น a.php รีไลแก้ปัญกา product/5 ให้คนเข้าใจง่าย(rewrite) มี admin จัดการ พาคนเข้าไปที่อื่น หรือห้ามไว้
+

@@ -1,0 +1,201 @@
+#pic{
+	background-image: url("../images/oodeo.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 100%;
+	height: 100%;
+	min-height: 581px;
+}
+
+#odeo{
+	font-family: 'Dosis', sans-serif;
+}	
+body{
+	background: #F2F3F4;
+}
+.navbar {
+    border-radius:0!important;
+    margin-bottom: 0;
+}
+.container-fluid{
+	font-family: 'Kanit', sans-serif;
+}
+.header-bg {
+	background-color: #003c71!important;
+}
+.header-bg .nav .open>a,
+ .header-bg .nav .open>a:focus, 
+ .header-bg .nav .open>a:hover,
+ .header-bg .nav>li>a:focus,
+ .header-bg .nav>li>a:hover
+  {
+    background-color: #01315a;
+    border-color: #01315a;
+}
+
+.navbar-inverse{
+	border-color: #003c71!important;
+}
+h3{
+	color: #fff;
+}
+.container-fluid.mainmenui p{
+	color: #fff!important;
+}
+.colorhead-green th{
+	color: #fff;
+	background-color: #016a32;
+}
+.panel-info>.panel-heading {
+	background-color: #f44236;
+	color: #fff;
+}
+.panel .panel-heading{
+	background-color: #424242;
+	color: #fff;
+	font-weight: bold;
+}
+.picicon{
+	padding: 0;
+	margin: 0;
+}
+.datepic #datetimepicker1{
+	background-color: #fff;
+} 
+.welcome h1{
+	margin-bottom: 30px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 90px;	
+}
+.welcome{
+	margin-top: 100px;
+}
+.home-point.linkwelcome{
+	margin-left: 50px;
+}
+h2{
+	font-family: 'Kanit', sans-serif;
+}
+.home-point{
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+}
+.home-point a{
+	color: #555!important;
+	text-decoration:none;
+}
+a:hover {
+    color: #959595!important;
+}
+a{
+	color: #b3b3b3;
+}
+.panel-info{
+	font-family: 'Kanit', sans-serif;
+}
+.show-cust-name p{
+	font-size: 16px;
+	font-family: 'Mitr', sans-serif;
+}
+.show-cust-companyname p{
+	font-size: 18px;
+	font-family: 'Mitr', sans-serif;
+}
+
+element.style {
+    font-size: 16px;
+}
+.well{
+	background-color: #fff;
+
+}
+.modal-title{
+	
+}
+.menusearch.panel-heading{
+	background-color: #016a32;
+}
+/*.panel-body{
+	padding: 0;
+}
+.system.form-group{
+	padding-right: 0;
+	padding-left: 0;
+}*/
+.login-header {
+	margin-top: 150px;
+	color: #fff;
+}
+.login-header h1 {
+	font-family: 'Raleway', sans-serif;
+	font-size: 100px;
+}
+.Purchase-tracking{
+	color: #fff;
+}
+.form-signin{
+	width: 50%;
+}
+.form-control{
+	height: 40px;
+}
+.well .panel-body{
+
+}
+.createpo .checkbox {
+    color: #000!important;
+}
+
+/*.table>tbody>tr>td, .createright{
+	padding: 0;
+	padding-left: 5px;
+}
+.table>tbody>tr>td, .scada{
+	padding: 8px;
+}
+}*/
+.spinner {
+  width: 100px;
+}
+.spinner input {
+  text-align: right;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 9.5px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+.addmodalcustomer .form-group{
+	padding: 8px;
+}
+.form-horizontal.createquobottom .control-label{
+	padding-top: 0;
+}		
+a.link_k{
+	color: #000;
+}
