@@ -15,7 +15,7 @@
       <div class="col-md-3">                         
           <img src="/images/n.png" style="width: 200px;margin-bottom: 20px">
       </div>
-      <div class="col-md-9" style="margin-top: 17 px">
+      <div class="col-md-9" style="margin-top: 17px">
         <div class="form-group">
           <h5><b>บริษัท โอดีโอ โซลูชั่น จำกัด (สำนักงานใหญ่)</b></h5>
           89/379&nbsp&nbsp หมู่ที่ 10&nbsp ถนนรัตนาธิเบศร์&nbsp ต.บางรักใหญ่ &nbspอ.บางบัวทอง &nbsp&nbspจ.นนทบุรี &nbsp11110</p>
@@ -289,7 +289,7 @@
           $('#company_address_th').text(vendors[vendor_id].company_address_th);
           $('#company_fax').text(vendors[vendor_id].company_fax);
           $('#taxid').text(vendors[vendor_id].taxid);
-          $('#company_tel').text(vendors[vendor_id].company_tel);              
+          $('#company_tel').text(vendors[vendor_id].company_tel);               
         }
      });
      $('#add-contact-form').on('click',function(){          

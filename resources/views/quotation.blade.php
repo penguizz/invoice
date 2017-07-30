@@ -81,27 +81,29 @@
           <tr>            
             <th style="width: 150px" class="text-center">Quotation No</th>
             <th class="text-center">Date</th>
-            <th class="text-center">Revision No</th>
-            <th class="text-center">Supplier</th>
+            <!-- <th class="text-center">Revision No</th> -->
+            <th class="text-center">Customer</th>
             <th class="text-center">Total</th>
             <th style= "width: 50px"></th>
           </tr>
         </thead>
-        <tbody>
-                  <tr>
-                      <td><a href="#" data-toggle="modal" data-target="#viewquotation
-                      " style="color:#333">Q201702-009</a></td>
-                      <td>24/02/2560</td>
-                      <td>rev.3</td>
-                      <td><a href="#" data-toggle="modal" data-target="#myModal2" style="color:#333">Geodis Wilson Thai Co.,Ltd</a></td>
-                      <td>127,223.00</td>
-                      <td>
-                          <div class="picicon">
-                            <button type="button" class="btn"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>              
-                          </div>
-                      </td>
-                  </tr>                  
-        </tbody>
+        @if(!empty($items))
+          <tbody>
+            @foreach($items as $item)
+            <tr>
+                <td><a href="/quotation/{{$item->quotation_id}}" class="link_k">{{$item->quotation_no}}</a></td>
+                <td>{{$item->quotation_date}}</td>
+                <td><a href="#" class="link_k" data-toggle="modal" data-target="#myModal2">{{$item->company_name_th}}</a></td>
+                <td>{{$item->quotation_total}}</td>
+                <td>
+                    <div class="picicon">
+                      <button type="button" class="btn" v-on:click="delete_product(index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>              
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+          </tbody>
+        @endif
       </table>           
   </div>
 </div>
@@ -113,7 +115,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">บริษัท เอสไอเอส ดิสทริบิวชั่น (ประเทศไทย) จำกัด (มหาชน)</h4>
+                <h4 class="modal-title">บริษัท เอสไอเอสsd ดิสทริบิวชั่น (ประเทศไทย) จำกัด (มหาชน)</h4>
             </div>
             <div class="modal-body">
                 <form>

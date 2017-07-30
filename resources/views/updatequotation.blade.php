@@ -9,13 +9,13 @@
 @section('content')
 
 <div class="" style="margin: 0 auto">
-  <form method="post" action="/quotation">
+  <form method="put" action="/quotation/{{$temp_quotation->quotation_id}}">
   {{csrf_field()}}
     <div class="container well" style="width: 80%">
       <div class="col-md-3">                         
           <img src="/images/n.png" style="width: 200px;margin-bottom: 20px">
       </div>
-      <div class="col-md-9" style="margin-top: 17 px">
+      <div class="col-md-9" style="margin-top: 17px">
         <div class="form-group">
           <h5><b>บริษัท โอดีโอ โซลูชั่น จำกัด (สำนักงานใหญ่)</b></h5>
           89/379&nbsp&nbsp หมู่ที่ 10&nbsp ถนนรัตนาธิเบศร์&nbsp ต.บางรักใหญ่ &nbspอ.บางบัวทอง &nbsp&nbspจ.นนทบุรี &nbsp11110</p>
@@ -28,17 +28,17 @@
               <td style="width:70%">
                   <div class="col-md-3"><p class="text-center"><strong>Customer :<br>ลูกค้า</strong></p></div>
                   <div class="col-md-7" style="margin-top: 5px">
-                     <select name="vendor_id" id="vendor_id" style="width: 100%">
+                     <select name="vendor_id" id="vendor_id" class="disabled-edit"  style="width: 100%" >
                         <option value="">Please select</option>
                         @if(!empty($vendors))
                           @foreach($vendors as $vendor)
-                            <option value="{{$vendor->vendor_id}}">{{$vendor->company_name_th}}</option>
+                            <option {{$temp_quotation->vendor_id==$vendor->vendor_id? 'selected':''}} value="{{$vendor->vendor_id}}">{{$vendor->company_name_th}}</option>
                           @endforeach
                         @endif
                      </select>
                   </div>
                   <div class="col-md-2 pull-left">
-                      <button type="button" class="btn btn-primary btn-md edit-content" href="/vendor/create?vendortype=customer">เพิ่มลูกค้าใหม่</p></button>
+                      <button type="button" class="disabled-edit btn btn-primary btn-md edit-content" href="/vendor/create?vendortype=customer">เพิ่มลูกค้าใหม่</p></button>
                   </div>
                </td>
                <td class="text-center text-middle"><strong>Quotaion No.<br>เลขที่ใบเสนอราคา</strong></td>
@@ -47,24 +47,24 @@
               <td>
                   <strong>Address/ที่อยู่:</strong></p>
                   <div class="">
-                      <span id="company_address_th"></span>
-                      โทร.<span id="company_tel"></span> 
-                      แฟ็กซ์ <span id="company_fax"></span>
+                      <span id="company_address_th">{{$temp_quotation->company_address_th}}</span>
+                      โทร.<span id="company_tel">{{$temp_quotation->company_tel}}</span> 
+                      แฟ็กซ์ <span id="company_fax">{{$temp_quotation->company_fax}}</span>
                   </div>
                   <strong>Contact Person:</strong></p>
                 <div class="col-md-10">  
-                    <input type="hidden" name="quotation_contact_person" id="quotation_contact_person_input">
-                    <input type="hidden" name="quotation_contact_tel" id="quotation_contact_tel_input">
-                    <input type="hidden" name="quotation_contact_email" id="quotation_contact_email_input">
+                    <input type="hidden" name="quotation_contact_person" id="quotation_contact_person_input" value="{{$temp_quotation->quotation_contact_person}}">
+                    <input type="hidden" name="quotation_contact_tel" id="quotation_contact_tel_input" value="{{$temp_quotation->quotation_contact_tel}}">
+                    <input type="hidden" name="quotation_contact_email" id="quotation_contact_email_input" value="{{$temp_quotation->quotation_contact_email}}">
 
-                    <span id="quotation_contact_person"></span>
-                    Mobile: <span id="quotation_contact_tel"></span> 
+                    <span id="quotation_contact_person">{{$temp_quotation->quotation_contact_person}}</span>
+                    Mobile: <span id="quotation_contact_tel">{{$temp_quotation->quotation_contact_tel}}</span> 
                     <br>
-                    E-mail: <span id="quotation_contact_email"></span>   
+                    E-mail: <span id="quotation_contact_email">{{$temp_quotation->quotation_contact_email}}</span>   
                   </p>
                 </div>
                 <div class="col-md-2">
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addnewcontact">เพิ่มผู้ติดต่อ</p></a>
+                    <a href="#" class="disabled-edit btn btn-primary" data-toggle="modal" data-target="#addnewcontact">เพิ่มผู้ติดต่อ</p></a>
                 </div>
               </td>
               <td class="text-center text-middle" style="padding:0px;">
@@ -73,21 +73,21 @@
                         <td>
                            <div class="col-md-4 col-lg-4">Quotation No.</div>
                            <div class="col-md-8 col-lg-8">
-                              <input type="text" class="form-control" name="quotation_no" style="width: 100%">
+                              <input type="text" class="form-control" name="quotation_no" style="width: 100%" value="{{$temp_quotation->quotation_no}}">
                            </div>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <div class="col-md-4 col-lg-4">Date </div>
-                           <div class="col-md-8 col-lg-8"><input type="date" class="form-control" name="quotation_date" id="quotation_date" style="width: 100%"></div>
+                           <div class="col-md-8 col-lg-8"><input type="date" class="form-control" name="quotation_date" id="quotation_date" value="{{$temp_quotation->quotation_date}}" style="width: 100%"></div>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <div class="col-md-4 col-lg-4">Revision No.</div>
                            <div class="col-md-8 1col-lg-8">
-                              <input type="text" class="form-control" name="quotation_revision" style="width: 100%">
+                              <input type="text" class="form-control" name="quotation_revision" value="{{$temp_quotation->quotation_revision}}" style="width: 100%">
                            </div>
                         </td>
                      </tr>
@@ -95,7 +95,7 @@
                         <td>
                            <div class="col-md-4 col-lg-4">Revision Date</div>
                            <div class="col-md-8 1col-lg-8">
-                              <input type="date" class="form-control" name="po_revision_update" style="width: 100%">
+                              <input type="date" class="form-control" name="quotation_revision_update" style="width: 100%">
                            </div>
                         </td>
                      </tr> -->
@@ -104,7 +104,7 @@
             </tr>
           </table>
           <div class="pull-right">
-            <button type="button" class="btn btn-primary btn-md" v-on:click="add_product()" href="javascript:;">เพิ่มรายการ</button>
+            <button type="button" class="disabled-edit btn btn-primary btn-md" v-on:click="add_product()" href="javascript:;">เพิ่มรายการ</button>
          </div>
          <div style="clear:both;height:5px;"></div>
          <table class="table table-bordered" style="width: 100%;">
@@ -119,11 +119,11 @@
             </tr>
             <tr v-for="(item,index) in items">
                 <td class="text-center">@{{index+1}}</td>                        
-                <td><input type="text" class="form-control" name="quotation_detail_part_no[]"></td>
-                <td><input type="text" class="form-control" name="quotation_description[]"></td>
-                <td><input type="text" class="form-control numberonly quantity" maxlength="3" name="quotation_quantity[]"></td>
-                <td><input type="text" class="form-control numberonlydot price" maxlength="9" name="quotation_unit_price[]"></td>
-                <td><input type="text" class="form-control quotation_amount" readonly="" name="quotation_amount[]"></td>
+                <td><input type="text" class="form-control" v-model="item.quotation_detail_part_no" name="quotation_detail_part_no[]"></td>
+                <td><input type="text" class="form-control" name="quotation_description[]" v-model="item.quotation_description"></td>
+                <td><input type="text" class="form-control numberonly quantity" v-model="item.quotation_quantity" maxlength="3" name="quotation_quantity[]"></td>
+                <td><input type="text" class="form-control numberonlydot price" v-model="item.quotation_unit_price" maxlength="9" name="quotation_unit_price[]"></td>
+                <td><input type="text" class="form-control quotation_amount" readonly="" name="quotation_amount[]" v-model="item.quotation_amount"></td>
                 <td><button type="button" class="btn btn-danger btn-sm" v-on:click="delete_product(index)" v-if="items.length>1" aria-label="Left Align"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 </button></td>
             </tr>
@@ -141,16 +141,16 @@
                 รวมมูลค่าสินค้า</p>
               </td>
               <td colspan="2">
-                <input type="text" class="form-control" readonly="" id="quotation_sub_total" name="quotation_sub_total">
+                <input type="text" class="form-control" readonly="" id="quotation_sub_total" name="quotation_sub_total" value="{{$temp_quotation->quotation_sub_total}}">
               </td>
             </tr>
             <tr>
               <td colspan="2">                          
-                <!-- <input  type="text" class="form-control" readonly="" name="po_vat_percen">                 -->
+                <!-- <input  type="text" class="form-control" readonly="" name="quotation_vat_percen">                 -->
                 VAT 7%</p>
               </td>
               <td colspan="2">
-                <input type="text" class="form-control" readonly="" id="quotation_vat_money" name="quotation_vat_money">
+                <input type="text" class="form-control" readonly="" id="quotation_vat_money" name="quotation_vat_money" value="{{$temp_quotation->quotation_vat_money}}">
               </td>
             </tr>
             <tr>
@@ -158,17 +158,18 @@
                 รวมจำนวนเงิน</p>
               </td>
               <td colspan="2">
-                <input type="text" class="form-control" readonly="" id="quotation_total" name="quotation_total">
+                <input type="text" class="form-control" readonly="" id="quotation_total" name="quotation_total" value="{{$temp_quotation->quotation_total}}">
               </td>
             </tr> 
          </table>
 
       </div>
       <div class="col-md-6">
-          <a href="/quotation"><button type="button" class="btn btn-default pull-left">Back</button></a>
+          <a href="/quotation"><button type="submit" class="btn btn-default pull-left">Back</button></a>
       </div>
       <div class="col-md-6 ">
-          <button type="submit" class="btn btn-primary pull-right">Submit</button>
+          <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Submit</button>
+          <button type="button" id='edit-content' class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button>
       </div>     
     
       </div>        
@@ -223,7 +224,7 @@
         </div>
     </div>
 </div>
-
+<!-- 
 <script type="text/javascript">
   var vendors={!! json_encode($vendors)!!};
   function cal()
@@ -268,9 +269,14 @@
         cal();
      });
 
-     $(document).on('input','#po_discount',function(){
-        cal();
-     }) 
+     $('input').attr('disabled',true);
+     $('.disabled-edit').addClass('disabled');
+     $('.disabled-edit').attr('disabled','disabled');
+     $('#edit-content').on('click',function(){
+        $('input').attr('disabled',false);
+        $('.disabled-edit').removeClass('disabled');
+        $('.disabled-edit').removeAttr('disabled');
+     });
   });
          
    var app = new Vue({
@@ -283,6 +289,100 @@
                   quotation_unit_price: '',
                   quotation_amount: '',
               }]
+      },
+      methods:{
+          add_product:function(){
+              this.items.push({
+                  quotation_detail_part_no: '',
+                  quotation_description: '',
+                  quotation_quantity: '',
+                  quotation_unit_price: '',
+                  quotation_amount: '',
+              });
+          },
+          delete_product:function(index){
+              Vue.delete(this.items, index);
+              setTimeout(function(){
+              cal();                    
+            },10)
+          }
+      } 
+   });
+    function add_to_select(result) {
+          vendors[result.vendor_id]=result.vendor;
+          $('#vendor_id').append('<option value="'+result.vendor_id+'">'+result.vendor.company_name_th+'</option>');
+          $('#vendor_id').val(result.vendor_id).trigger( "change" );
+          $('#modal-edit-content').find('.modal').modal('hide');
+     }
+</script> -->
+
+<script type="text/javascript">
+  var vendors={!! json_encode($vendors)!!};
+  function cal()
+   {
+      var sum=0;
+      $('.quantity').each(function(){
+         var price = $(this).parent().parent().find('.price').val();
+         if($(this).val()!='' && price!='')
+         {
+            var amount = parseInt($(this).val()) * parseFloat(price);
+            sum +=  amount;
+            $(this).parent().parent().find('.quotation_amount').val(amount);
+         }
+      });
+      $('#quotation_sub_total').val(sum);
+      $('#quotation_vat_money').val((sum*7)/100);
+      $('#quotation_total').val(sum+(sum*7)/100); 
+   }
+  $(function(){
+    $('#vendor_id').on('change',function(){
+        var vendor_id = $(this).val();
+        if(vendor_id!="" && typeof vendors[vendor_id]!='undefined'){
+          $('#company_address_th').text(vendors[vendor_id].company_address_th);
+          $('#company_fax').text(vendors[vendor_id].company_fax);
+          $('#taxid').text(vendors[vendor_id].taxid);
+          $('#company_tel').text(vendors[vendor_id].company_tel);              
+        }
+     });
+     $('#add-contact-form').on('click',function(){          
+        $('#quotation_contact_person').text($('#quotation_contact_person_form').val());
+        $('#quotation_contact_tel').text($('#quotation_contact_tel_form').val());
+        $('#quotation_contact_email').text($('#quotation_contact_email_form').val());
+
+        $('#quotation_contact_person_input').val($('#quotation_contact_person_form').val());
+        $('#quotation_contact_tel_input').val($('#quotation_contact_tel_form').val());
+        $('#quotation_contact_email_input').val($('#quotation_contact_email_form').val());            
+     });
+      $(document).on('input','.price',function(){
+        cal();            
+     })
+     $(document).on('input','.quantity',function(){
+        cal();
+     });
+     $('input').attr('disabled',true);
+     $('.disabled-edit').addClass('disabled');
+     $('.disabled-edit').attr('disabled','disabled');
+     $('#edit-content').on('click',function(){
+        $('input').attr('disabled',false);
+        $('.disabled-edit').removeClass('disabled');
+        $('.disabled-edit').removeAttr('disabled');
+     });
+  });
+         
+   var app = new Vue({
+      el:'#product-detail',
+      data: {
+          @if(!isset($temp_detail) || empty($temp_detail))
+          items:[{
+                  quotation_detail_part_no: '',
+                  quotation_description: '',
+                  quotation_quantity: '',
+                  quotation_unit_price: '',
+                  quotation_amount: '',
+              }]
+          @else
+          items:{!! $temp_detail!!}
+          @endif
       },
       methods:{
           add_product:function(){

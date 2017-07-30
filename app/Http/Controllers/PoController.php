@@ -245,7 +245,7 @@ class PoController extends Controller
         }
 
         // dd($temp_vendors);
-        return view('showpo',['vendors'=>$vendors,'temp_po'=>$temp_po,'temp_detail'=>$temp_detail]);
+        return view('updatepo',['vendors'=>$vendors,'temp_po'=>$temp_po,'temp_detail'=>$temp_detail]);
 
     }
 
@@ -269,7 +269,7 @@ class PoController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $vendor_id=\Input::get('vendor_id');
+        $vendor_id=\Input::get('vendor_id');
         $po_no=\Input::get('po_no');
         $po_date=\Input::get('po_date');
         $po_revision=\Input::get('po_revision');
@@ -403,7 +403,7 @@ class PoController extends Controller
             }
             else
             {
-                $error_messages[]="xxxx";        
+                $error_messages[]="ไม่สามารถใช้รหัสสินค้านี้ได้";        
             }
             if(!empty($error_messages)){  
                 DB::rollBack();

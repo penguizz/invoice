@@ -68,7 +68,7 @@
     </div>        
 </div>
 <div class="" style="margin-bottom: 15px">
-    <a type="button" class="btn btn-primary" href="/po/create" style="width: 310px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>เพิ่มรายการ</a>
+    <a type="button" class="btn btn-primary" href="/po/create" style="width: 310px"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> เพิ่มรายการ</a>
 </div>
 @endsection
 
