@@ -17,12 +17,39 @@ class PoController extends Controller
         $this->middleware('auth');
     }
     
-    public function index() 
-    {
+    public function index(Request $request) 
+    {   
+        // dd($request->all());
+        $vendor_id = $request->get('vendor_id');
+        $pno = $request->get('pno');
+        $po_date = $request->get('po_date');
         $temp_po=DB::table('purchaseorders')
-            ->leftJoin('vendors','vendors.vendor_id','=','purchaseorders.vendor_id')
+            ->leftJoin('vendors','vendors.vendor_id','=','purchaseorders.vendor_id');
+        if (is_numeric($vendor_id) && $vendor_id > 0) {
+             $temp_po->where('purchaseorders.vendor_id',$vendor_id);
+        }
+        if (!empty($pno)) {
+             $temp_po->where('po_no','like','%'.$pno.'%');
+        }
+        if (!empty($po_date)) {
+             $temp_po->where('po_date','like','%'.$po_date.'%');
+        }
+
+        $temp_vendors=DB::table('vendors')  
+            ->where('vendortype','supplier')
             ->get();
-        return view('po',['items'=>$temp_po]);
+
+        $vendors=[];
+        if(!empty($temp_vendors)){
+            foreach($temp_vendors as $temp){            //check data and loop for change value to id 
+                $vendors[$temp->vendor_id]=$temp;
+            }
+        }
+
+           $temp_data = $temp_po->get();
+           //return view('po',['items'=>$temp_data]);
+        
+        return view('po',['items'=>$temp_data,'vendors'=>$vendors]);
     }
 
     /**

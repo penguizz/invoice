@@ -12,58 +12,38 @@
 <div class="panel panel-default">
   <div class="panel-heading">ค้นหา</div>
     <div class="panel-body">
-        <form>
-          <div class="form-group">
-            <label for="usr">Type</label>
-            <select class="form-control">
-                <option value="0">กรุณาเลือก</option>
-                <option value="customer">Customer</option>
-                <option value="supplier">Supplier</option>
-            </select>
-          </div>
+        <form action="http://www.penguizz.local/po" id="frompo" method="get" class="no-ajax">
           <div class="form-group">
             <label for="usr">Purchase Order No</label>
                 <div class="" style="margin-top: 5px">
-                  <select class="js-example-basic-multiple" style="width: 100%;height: 40%;" >
-                      <option value="">กรุณาเลือก</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                  </select>
+                  <input type="search" class="form-control" name="pno" value="{{Request::get('pno')}}" style="width: 100%">
                 </div>
           </div>
           <div class="form-group">
             <label for="usr">Supplier Name</label>
                 <div class="" style="margin-top: 5px">
-                  <select class="js-example-basic-multiple" style="width: 100%;height: 40%;" >
-                      <option value="">กรุณาเลือก</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
-                      <option value="bL">Alabama</option>
+                  <select style="width: 100%;height: 40%;" id="vendor_id" name="vendor_id" >
+                      <option value="">Please select</option>
+                        @if(!empty($vendors))
+                          @foreach($vendors as $vendor)
+                            <option {{Request::get('vendor_id')==$vendor->vendor_id?' selected':''}} value="{{$vendor->vendor_id}}">{{$vendor->company_name_th}}</option>
+                          @endforeach
+                        @endif
                   </select>
                 </div>
           </div>
+          <div class="form-group">
             <label for="pwd">Date</label>
-            <div class="datepic">
-              <div class='input-group date' id='datetimepicker1'>
-                <!-- <input type="text" name="daterange" /> -->
-                <input type='text' name="daterange" class="form-control" />
-                 <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                 </span>
+              <div class="date">
+                 <input type="date" class="form-control" name="po_date" id="po_date" style="width: 100%;" value="{{Request::get('po_date')}}">
                </div>
-            </div>
-            <br>
+          </div>
+          <div class="form-group">
             <div class="pull-right">
-               <button type="button" class="btn">Search</button>
-               <button type="button" class="btn btn-danger">Clear</button>
+               <button type="submit" class="btn">Search</button>
+               <button type="button" id="clear_btn" class="btn btn-danger">Clear</button>
             </div>
+          </div>
         </form>
     </div>        
 </div>
@@ -386,29 +366,17 @@
         </div>
       
     </div>
-
-</div>  
 <script type="text/javascript">
-    var app = new Vue({
-      el:'#product-detail',
-      data: {
-          items:[{
-                  po_detail_part_no: '',
-                  po_description: '',
-                  po_quantity: '',
-                  po_unit_price: '',
-                  po_amount: '',
-              }]
-      },
-        delete_product:function(index){
-            Vue.delete(this.items, index);
-            setTimeout(function(){
-            cal();                    
-          },10)
-        }
-      } 
-    });
+    $(function(){
+      $('#clear_btn').on('click',function(){
+        $('#frompo input').val('');
+        $('#frompo select').val('').trigger( "change" );
+      });
+      
+    })
 </script>
+</div>  
+
 @endsection
 @section('pagination')
 @include('pagination')

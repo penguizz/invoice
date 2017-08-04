@@ -139,7 +139,7 @@
             <tr>
               <td colspan="3" rowspan="5">
                 <u><b>Remark :</b></p></u>
-                <textarea class="form-control" id="po_remark" name="po_remark" rows="3">{{$temp_po->po_remark}}</textarea>
+                <textarea class="form-control disabled-edit" id="po_remark" name="po_remark" rows="3">{{$temp_po->po_remark}}</textarea>
                 <br>
                 <b>Payment/การชำระเงิน</b></p>
                   <div class="checkbox">

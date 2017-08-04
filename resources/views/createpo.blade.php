@@ -138,7 +138,7 @@
             <tr>
               <td colspan="3" rowspan="5">
                 <u><b>Remark :</b></p></u>
-                <textarea class="form-control" id="po_remark" name="po_remark" rows="3"></textarea>
+                <textarea class="form-control edit-content" id="po_remark" name="po_remark" rows="3"></textarea>
                 <br>
                 <b>Payment/การชำระเงิน</b></p>
                   <div class="checkbox">
@@ -345,7 +345,7 @@
           $('#vendor_id').append('<option value="'+result.vendor_id+'">'+result.vendor.company_name_th+'</option>');
           $('#vendor_id').val(result.vendor_id).trigger( "change" );
           $('#modal-edit-content').find('.modal').modal('hide');
-     }
+  }
 </script>
 
 @endsection
