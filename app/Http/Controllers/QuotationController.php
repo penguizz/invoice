@@ -16,12 +16,41 @@ class QuotationController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
+        $vendor_id = $request->get('vendor_id');
+        $quo_no = $request->get('quo_no');
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
         $temp_quotation=DB::table('quotations')
-            ->leftJoin('vendors','vendors.vendor_id','=','quotations.vendor_id')
+            ->leftJoin('vendors','vendors.vendor_id','=','quotations.vendor_id');
+        if (is_numeric($vendor_id) && $vendor_id > 0) {
+             $temp_quotation->where('quotations.vendor_id',$vendor_id);
+        }
+        if (!empty($quo_no)) {
+             $temp_quotation->where('quotation_no','like','%'.$quo_no.'%');
+        }
+        if (!empty($start_date)) {
+             $temp_quotation->where('quotation_date','>=',$start_date);
+        }
+        if (!empty($end_date)) {
+             $temp_quotation->where('quotation_date','<=',$end_date);
+        }
+
+        $temp_vendors=DB::table('vendors')  
+            ->where('vendortype','customer')
             ->get();
-        return view('quotation',['items'=>$temp_quotation]);
+
+        $vendors=[];
+        if(!empty($temp_vendors)){
+            foreach($temp_vendors as $temp){            //check data and loop for change value to id 
+                $vendors[$temp->vendor_id]=$temp;
+            }
+        }
+           $temp_data = $temp_quotation->paginate(20);
+           //return view('po',['items'=>$temp_data]);
+        
+        return view('quotation',['items'=>$temp_data,'vendors'=>$vendors]);
     }
 
     /**
@@ -361,6 +390,7 @@ class QuotationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('quotations')->where('quotation_id',$id)->delete();
+        return response(['callback'=>'save_success'],200);
     }
 }

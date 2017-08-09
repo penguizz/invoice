@@ -359,7 +359,9 @@
           $('#vendor_id').append('<option value="'+result.vendor_id+'">'+result.vendor.company_name_th+'</option>');
           $('#vendor_id').val(result.vendor_id).trigger( "change" );
           $('#modal-edit-content').find('.modal').modal('hide');
-     }
+    }
+  
+
 </script>
 
 @endsection

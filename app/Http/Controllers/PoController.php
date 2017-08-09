@@ -22,7 +22,8 @@ class PoController extends Controller
         // dd($request->all());
         $vendor_id = $request->get('vendor_id');
         $pno = $request->get('pno');
-        $po_date = $request->get('po_date');
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
         $temp_po=DB::table('purchaseorders')
             ->leftJoin('vendors','vendors.vendor_id','=','purchaseorders.vendor_id');
         if (is_numeric($vendor_id) && $vendor_id > 0) {
@@ -31,8 +32,11 @@ class PoController extends Controller
         if (!empty($pno)) {
              $temp_po->where('po_no','like','%'.$pno.'%');
         }
-        if (!empty($po_date)) {
-             $temp_po->where('po_date','like','%'.$po_date.'%');
+        if (!empty($start_date)) {
+             $temp_po->where('po_date','>=',$start_date);
+        }
+        if (!empty($end_date)) {
+             $temp_po->where('po_date','<=',$end_date);
         }
 
         $temp_vendors=DB::table('vendors')  
@@ -46,7 +50,7 @@ class PoController extends Controller
             }
         }
 
-           $temp_data = $temp_po->get();
+           $temp_data = $temp_po->paginate(20);
            //return view('po',['items'=>$temp_data]);
         
         return view('po',['items'=>$temp_data,'vendors'=>$vendors]);
@@ -462,6 +466,7 @@ class PoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('purchaseorders')->where('po_id',$id)->delete();
+        return response(['callback'=>'save_success'],200);
     }
 }
